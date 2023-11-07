@@ -5,6 +5,7 @@ from .forms import ProjectForm, SuperuserCreationForm, SupervisorRequestForm
 from django.http import HttpResponse
 from django.contrib import auth
 from django.urls import reverse
+from django.contrib import messages
 
 
 class HomePageView(TemplateView):
@@ -48,6 +49,31 @@ def projects_list(request):
     return render(request, 'pages/project_list.html', context)
 
   # Create a form for supervisor requests
+
+
+def delete_project(request, project_id):
+    try:
+        project = Project.objects.get(pk=project_id)
+        project.delete()
+    except Project.DoesNotExist:
+        messages.error(
+            request, 'The project does not exist or has already been deleted.')
+
+    return redirect('projects_list')
+
+
+def edit_project(request, project_id):
+    project = get_object_or_404(Project, pk=project_id)
+
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, instance=project)
+        if form.is_valid():
+            form.save()
+            return redirect('projects_list')
+    else:
+        form = ProjectForm(instance=project)
+
+    return render(request, 'pages/edit_project.html', {'form': form, 'project': project})
 
 
 def create_supervisor_request(request, project_id):
