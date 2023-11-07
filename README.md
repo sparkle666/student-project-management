@@ -1,4 +1,4 @@
-[Mockup image](mockup.png)
+![Mockup image](mockup.PNG)
 
 ### TODO
 
