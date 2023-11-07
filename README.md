@@ -1,3 +1,5 @@
+[Mockup image](mockup.png)
+
 ### TODO
 
 - Allow to create a project
