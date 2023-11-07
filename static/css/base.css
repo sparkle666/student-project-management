@@ -1,0 +1,250 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+}
+
+.container {
+  max-width: 960px;
+}
+
+.pricing-header {
+  max-width: 700px;
+}
+
+
+.gt-body {
+  width: 100%;
+}
+
+.my-card {
+  width: 400px;
+  margin: auto;
+  padding: 50px 30px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.gt-container {
+  margin: 0px 100px;
+  background-color: white;
+  padding: 20px;
+}
+
+.gt-headline {
+  font-size: 20px;
+  font-weight: 500;
+  border-bottom: 2px solid rgb(245, 245, 245);
+  padding: 12px 0;
+  margin-bottom: 12px;
+}
+
+.rating i {
+  color: gold;
+}
+
+.navbar {
+  border-bottom: 1px solid rgb(245, 245, 245);
+}
+
+.card-dropshadow {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.gt-p {
+  font-weight: 400;
+  padding: 8px 0;
+}
+
+.gt-footer {
+  background-color: #00122c;
+  color: #ffffff;
+  height: 300px;
+}
+
+/*.gt-timeline form w3schools */
+
+/* The actual.gt-timeline (the vertical ruler) */
+.gt-timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* The actual.gt-timeline (the vertical ruler) */
+.gt-timeline::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: rgb(190, 190, 190);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+/* Container around content */
+.tm-container {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+
+/* The circles on the.gt-timeline */
+.tm-container::after {
+  content: '';
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  right: -22px;
+  background-color: white;
+  border: 4px solid #FF9F55;
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Place the.tm-container to the left */
+.gt-left {
+  left: 0;
+}
+
+/* Place the.tm-container to the right */
+.gt-right {
+  left: 50%;
+}
+
+/* Add arrows to the left.tm-container (pointing right) */
+.gt-left::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  right: 30px;
+  border: medium solid white;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent white;
+}
+
+/* Add arrows to the right.tm-container (pointing left) */
+.gt-right::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  left: 30px;
+  border: medium solid white;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent white transparent transparent;
+}
+
+/* Fix the circle for.tm-containers on the right side */
+.gt-right::after {
+  left: -16px;
+}
+
+/* The actual content */
+.gt-content {
+  padding: 20px 30px;
+  background-color: #f3f3f38f;
+  position: relative;
+  border-radius: 6px;
+}
+
+/* Media queries - Responsive.gt-timeline on screens less than 600px wide */
+@media screen and (max-width: 600px) {
+
+  /* Place the timelime to the left */
+  .gt-timeline::after {
+    left: 31px;
+  }
+
+  /* Full-width.tm-containers */
+  .tm-container {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+  }
+
+  /* Make sure that all arrows are pointing leftwards */
+  .tm-container::before {
+    left: 60px;
+    border: medium solid white;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
+  }
+
+  /* Make sure all circles are at the same spot */
+  .gt-left::after,
+  .gt-right::after {
+    left: 15px;
+  }
+
+  /* Make all right containers behave like the left ones */
+  .gt-right {
+    left: 0%;
+  }
+}
+
+/* HERO SECTION */
+
+/* .gt_hero {
+  width: 100%;
+  height: 100vh;
+  background: url("/static/images/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+} */
+.gt_hero {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0) 50%),
+    url("/static/images/hero.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.gt_hero_content {
+  position: absolute;
+  z-index: 3;
+  top: 100px;
+  left: 20px;
+}
+
+.gt_hero_content>h1 {
+  font-size: 70px;
+  font-weight: 800;
+  text-shadow: black;
+  color: white;
+  margin-bottom: 0px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)
+}
+
+.gt_hero_content p {
+  margin-top: 30px;
+  font-weight: 300;
+  color: white;
+}

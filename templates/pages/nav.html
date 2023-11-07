@@ -1,0 +1,48 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-light">
+  <div class="container-fluid">
+    <svg id="logo-35" width="50" height="39" viewBox="0 0 50 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z" class="ccompli1" fill="#007AFF"></path>
+      <path d="M17.4224 27.102L11.4192 36H33.5008L49 13.0271H32.7024L23.2064 27.102H17.4224Z" class="ccustom"
+        fill="#312ECB"></path>
+    </svg>
+    <!-- <img src="{% static 'images/logo.svg' %}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> -->
+    <a class="navbar-brand" href="{% url 'home' %}">ProjectPro</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if the_user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'projects_list' %}">All Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'create_project' %}">Submit Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'create_project' %}">Request Supervisor</a>
+        </li>
+        {% endif %}
+      </ul>
+      {% if not the_user.is_authenticated %}
+      <li class="nav-item d-flex justify-content-start">
+        <a class="btn btn-primary ml-8" style="margin-right: 20px;" href="{% url 'account_login' %}">Log In</a>
+        <a class="btn btn-primary" href="{% url 'account_signup' %}">Sign Up</a>
+      </li>
+      {% endif %}
+      {% if the_user.is_authenticated %}
+      <li class="nav-item dropdown d-flex" style="margin-left: 100px;">
+        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-user text-primary"></i>
+        </a>
+        <ul class="dropdown-menu" style="margin-left: -100px;">
+          <li class="dropdown-item text-dark">{{ the_user.email|truncatechars:10 }} </li>
+          <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+        </ul>
+      </li>
+      {% endif %}
+    </div>
+  </div>
+</nav>

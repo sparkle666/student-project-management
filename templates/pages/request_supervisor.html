@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Create Supervisor Request
+{% endblock %}
+
+{% block content %}
+<div class="container card mt-5 p-4">
+  <h2>Create a Supervisor Request for: {{ project.title }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-warning">Submit Request</button>
+  </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block content %}
+        <p class="gt-headline">Catch a glimpse of our glamourous hotels</p>
+        <div class="row">
+            {% for hotel in hotels %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card card-dropshadow">
+                    <img src="{{ hotel.featured_image.url }}" class="card-img-top" alt="{{ hotel.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ hotel.name }}</h5>
+                        <p class="card-text">
+                          {% if hotel.description|length > 31 %}
+                              {{ hotel.description|truncatechars:31 }}
+                          {% else %}
+                              {{ hotel.description }}
+                          {% endif %}
+                        </p>
+                        <div class="rating">
+                            {% for i in "12345" %}
+                              {% if i|add:"0" <= hotel.rating %}
+                                <i class="fas fa-star"></i>
+                              {% else %}
+                                <i class="far fa-star"></i>
+                              {% endif %}
+                            {% endfor %}
+                          </div>                          
+                        <p class="card-text"><b>Price:</b> {{ hotel.price }} <span style="color: rgb(66, 66, 66);">/night</span></p>
+                        <a href="{% url 'hotel_detail' hotel.id %}" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+{% endblock content %}

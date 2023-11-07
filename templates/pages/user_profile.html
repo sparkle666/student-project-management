@@ -1,0 +1,65 @@
+{% extends "_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div style="height: 500px;">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="home-tab" 
+              data-bs-toggle="tab" data-bs-target="#home-tab-pane" 
+              type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
+              Profile
+            </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="profile-tab" 
+              data-bs-toggle="tab" data-bs-target="#profile-tab-pane" 
+              type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
+              Rooms
+            </button>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" 
+            id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+            <div class="container mt-4">
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% if field.name != 'password' %}
+                            <div>
+                                <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <ul>
+                                        {% for error in field.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <button type="submit">Submit</button>
+                </form>  
+            </div>
+            </div>
+            <div class="tab-pane fade" 
+            id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                <div class="container mt-4">
+                
+                    All checked in rooms:
+                    {% for room in rooms %}
+                        Room ID: {{ room.id }}
+                        Room hotel: {{ room.hotel.name }}
+                        Room Guest: {{ room.guest.username }}
+                        Room is is_occupied: {{ room.is_occupied }}
+                    {% endfor %}
+        
+                </div>  
+            </div>
+        </div>
+        
+            
+    </div>
+{% endblock %}
