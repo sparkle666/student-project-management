@@ -1,8 +1,11 @@
 from django.views.generic import TemplateView
 from accounts.models import CustomUser, Project, SupervisorRequest
 from django.shortcuts import redirect, render, get_object_or_404
-from .forms import ProjectForm, SupervisorRequestForm
+from .forms import ProjectForm, SuperuserCreationForm, SupervisorRequestForm
 from django.http import HttpResponse
+from django.contrib import auth
+from django.urls import reverse
+
 
 
 class HomePageView(TemplateView):
@@ -68,3 +71,23 @@ def create_supervisor_request(request, project_id):
         form = SupervisorRequestForm()
 
     return render(request, 'pages/request_supervisor.html', {'form': form, 'project': project})
+
+
+def superuser_signup(request):
+    if request.method == 'POST':
+        form = SuperuserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_superuser = True
+            user.is_staff = True
+            user.save()
+
+            # Log in the superuser
+            user = auth.authenticate(username=user.username, password=request.POST['password1'])
+            if user is not None:
+                auth.login(request, user)
+
+            return redirect(reverse('admin:index'))  # Redirect to the admin dashboard.
+    else:
+        form = SuperuserCreationForm()
+    return render(request, 'account/superuser_signup.html', {'form': form})

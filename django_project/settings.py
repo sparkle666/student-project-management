@@ -191,8 +191,8 @@ ACCOUNT_FORMS = {'signup': 'allauth.account.forms.SignupForm'}
 
 
 JAZZMIN_SETTINGS = {
-    "site_title": "ProjectMgt Admin",
-    "site_header": "ProjectMgt",
-    "copyright": "ProjectMgt 2023",
-    "site_brand": "ProjectMgt",
+    "site_title": "ProjectPro Admin",
+    "site_header": "ProjectPro",
+    "copyright": "ProjectPro 2023",
+    "site_brand": "ProjectPro",
 }
