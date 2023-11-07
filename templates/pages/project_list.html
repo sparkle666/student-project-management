@@ -6,28 +6,60 @@
 
 {% block content %}
 <div class="container mt-5 p-4">
-    <h2 class="my-4">List of Projects</h2>
-    <ul class="list-group">
-        {% for project in projects %}
-        <li class="list-group-item">
-            <h5 class="mb-1">{{ project.title }}</h5>
-            <p>{{ project.description }}</p>
-            {% if project.approved %}
-            <p class="text-success">Status: Approved</p>
-            {% else %}
-            <p>Status: <span class="text-warning">Pending Approval</span> </p>
+    <div class="container mt-4">
+        <h3>Project List</h3>
+        <table class="table table-striped">
+            {% if projects %}
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Supervisor</th>
+                    <th>Student</th>
+                    <th>Submitted Request</th>
+                    <th>Approved</th>
+                    <th>Submitted At</th>
+                </tr>
+            </thead>
             {% endif %}
-
-            {% if project.supervisor %}
-            <p class="mb-1">Supervisor: {{ project.supervisor }}</p>
-            {% else %}
-            <p class="mb-1">No Supervisor Assigned</p>
-            <a href="{% url 'create_supervisor_request' project.id %}" class="btn btn-warning">Request For A
-                Supervisor</a>
-            {% endif %}
-            <!-- Display other project details as needed -->
-        </li>
-        {% endfor %}
-    </ul>
+            <tbody>
+                {% for project in projects %}
+                <tr>
+                    <td>{{ project.title }} </td>
+                    <td>{{ project.description }}</td>
+                    <td>
+                        {% if project.supervisor is None %}
+                        <i class="fa fa-times text-primary"></i>
+                        {% else %}
+                        {{ project.supervisor }}
+                        {% endif %}
+                    </td>
+                    <td>{{ project.student }}</td>
+                    <td>
+                        {% if project.submitted_request %}
+                        <i class="fa fa-check text-primary"></i>
+                        {% else %}
+                        <i class="fa fa-times"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if project.approved %}
+                        <i class="fa fa-check text-primary"></i>
+                        {% else %}
+                        <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                    </td>
+                    <td>{{ project.submitted_at }}</td>
+                    <td><span><a href="">Edit</a></span></td>
+                    <td><span><a href="">Delete</a></span></td>
+                </tr>
+                {% empty %}
+                <div class="card p-5">
+                    <p class="text-center">You don't have any projects yet...</p>
+                </div>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock content %}
