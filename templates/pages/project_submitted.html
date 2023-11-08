@@ -11,8 +11,11 @@
   </div>
   <p class="gt-headline">Your Topic has been submitted!!</p>
   <div class="container">
-    <p>Project Title: {{ project.title }}</p>
-    <p>Project Description: {{ project.description }}</p>
+    <p> <b>Project Title:</b> {{ project.title }}</p>
+    <p><b>Project Description:</b> {{ project.description }}</p>
+    <hr class="mt-4">
+    <a href="{% url 'projects_list' %}" class="btn btn-warning">Show Projects</a>
   </div>
+
 </div>
 {% endblock content %}
